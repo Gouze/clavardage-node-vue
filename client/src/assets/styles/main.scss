@@ -1,0 +1,13 @@
+.btn-primary {
+  background: #fff;
+  color: #000;
+  text-transform: uppercase;
+  border: 2px solid #000;
+  font-weight: 800;
+  padding: 0.2rem 0.4rem;
+  box-shadow: 6px 6px 0px #80ffdb;
+  transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+  &:hover {
+    box-shadow: 3px 3px 0px #80ffdb;
+  }
+}
