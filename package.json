@@ -5,11 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "client-install": "yarn --cwd ./client/",
+    "client-install": "yarn install --cwd ./client/",
     "server": "nodemon app.js",
     "client": "yarn --cwd ./client/ serve",
-    "dev": "concurrently \" yarn server \" \"yarn client\"",
-    "build": "yarn build --cwd ./client/"
+    "dev": "concurrently \" yarn server \" \"yarn client\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
