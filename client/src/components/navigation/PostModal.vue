@@ -1,12 +1,17 @@
 <template>
   <div>
     <div
+      @click.self="toggleModal"
       v-if="isModalOpen"
-      class="modal w-1/4 mx-auto fixed bg-aquamarine-500 top-0 left-0 right-0"
+      class="modal w-1/4 mx-auto fixed  top-0 left-0 h-screen w-screen  z-20 flex justify-center items-center"
     >
-      yolo
+      <PostForm @click.prevent></PostForm>
     </div>
-    <button @click.prevent="toggleModal" class="fixed bottom-0 right-0 post-modal__button">
+    <button
+      @click.prevent="toggleModal"
+      v-if="isLoggedIn"
+      class="fixed bottom-0 right-0 post-modal__button"
+    >
       Post
     </button>
   </div>
@@ -27,12 +32,19 @@
     box-shadow: 3px 3px 0px #80ffdb;
   }
 }
+.modal {
+  background: rgba(0, 0, 0, 0.8);
+}
 </style>
 
 <script>
+import PostForm from '../forms/PostForm';
+import { mapGetters } from 'vuex';
 export default {
   name: 'PostModal',
-
+  components: {
+    PostForm,
+  },
   data() {
     return {
       isModalOpen: false,
@@ -42,6 +54,9 @@ export default {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
     },
+  },
+  computed: {
+    ...mapGetters(['isLoggedIn']),
   },
 };
 </script>

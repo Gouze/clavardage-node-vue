@@ -1,6 +1,6 @@
 <template>
-  <div id="loginView">
-    <LoginForm></LoginForm>
+  <div id="loginView" class="flex justify-center items-center app-screen">
+    <LoginForm class="black-shadow"></LoginForm>
   </div>
 </template>
 

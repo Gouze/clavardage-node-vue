@@ -8,7 +8,8 @@
     "client-install": "yarn --cwd ./client/",
     "server": "nodemon app.js",
     "client": "yarn --cwd ./client/ serve",
-    "dev": "concurrently \" yarn server \" \"yarn client\""
+    "dev": "concurrently \" yarn server \" \"yarn client\"",
+    "build": "yarn build --cwd ./client/"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -17,12 +18,15 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "mongoose": "^5.9.25",
     "multer": "^1.4.2",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "vue-adorable-avatar": "^1.0.0",
+    "vue-lodash": "^2.1.2"
   },
   "engines": {
     "node": "12.x"

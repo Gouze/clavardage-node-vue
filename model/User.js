@@ -23,9 +23,9 @@ const UserSchema = new Schema({
   },
   avatarURL: {
     type: String,
-    default: '',
+    default: null,
   },
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'posts' }],
   createdAt: {
     type: Date,
     default: Date.now,

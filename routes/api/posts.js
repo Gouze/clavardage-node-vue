@@ -66,5 +66,32 @@ router.post(
       });
   },
 );
+/**
+ * @route GET api/posts
+ * @desc Get all posts
+ * @access Private
+ */
+router.get(
+  '/',
+  passport.authenticate('jwt', {
+    session: false,
+  }),
+  (req, res) => {
+    let posts = Post.find()
+      .populate('author')
+      .then((posts) => {
+        return res.status(200).json({
+          sucess: true,
+          posts: posts,
+        });
+      });
+
+    // if (posts) {
+    //   return res.status(200).json({
+    //     posts: posts,
+    //   });
+    // }
+  },
+);
 
 module.exports = router;

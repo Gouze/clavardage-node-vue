@@ -5,9 +5,13 @@ import store from './store';
 import './assets/styles/index.css';
 import './assets/styles/main.scss';
 import axios from 'axios';
+import VueLodash from 'vue-lodash';
+import lodash from 'lodash';
+import LottieAnimation from 'lottie-vuejs'; // import lottie-vuejs
 
+Vue.use(LottieAnimation); // add lottie-animation to your global scope
 Vue.config.productionTip = false;
-
+Vue.use(VueLodash, { name: 'custom', lodash: lodash });
 // Setting axios as vue's http module
 Vue.prototype.$http = axios;
 //load the token form the localStorage

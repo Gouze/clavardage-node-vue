@@ -21,10 +21,11 @@
         >
       </div>
       <div class="text-md font-black flex flex-col">
-        <a
+        <router-link
+          to="/"
           href="#responsive-header"
           class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >Docs</a
+          >Home</router-link
         >
         <a
           href="#responsive-header"
@@ -49,9 +50,9 @@
       <span class="font-semibold text-xl tracking-tight">Clavardage</span>
     </div>
     <div class="flex justify-end w-1/3">
-      <router-link class="btn-primary" to="/login" v-if="!isLoggedIn">Login</router-link>
-      <router-link class="btn-primary" to="/register" v-if="!isLoggedIn">Register</router-link>
-      <div v-if="isLoggedIn" @click.prevent="logoutUser">Logout</div>
+      <router-link class="btn primary" to="/login" v-if="!isLoggedIn">Login</router-link>
+      <router-link class="btn primary" to="/register" v-if="!isLoggedIn">Register</router-link>
+      <div v-if="isLoggedIn" @click.prevent="logoutUser" class="btn primary">Logout</div>
     </div>
   </nav>
 </template>

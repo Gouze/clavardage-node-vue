@@ -1,61 +1,3 @@
-// import axios from 'axios';
-// import router from '../../router';
-
-// const state = {
-//   token: localStorage.getItem('token') || '',
-//   user: {},
-//   status: '',
-// };
-
-// const getters = {
-//   // isLoggedIn: function(state) {
-//   //   if (state.token != '') {
-//   //     return true;
-//   //   } else {
-//   //     return false;
-//   //   }
-//   // },
-
-//   isLoggedIn: (state) => !!state.token,
-//   authState: (state) => state.status,
-//   user: (state) => state.user,
-//   error: (state) => state.error,
-// };
-// const actions = {
-//   //login action
-//   async login({ commit }, user) {
-//     commit('auth_request');
-//     let res = await axios.post('http://localhost:3000/api/users/login', user);
-//     if (res.data.succes) {
-//       const token = res.data.token;
-//       const user = res.data.user;
-//       // Store the token in localStorage
-//       localStorage.setItem('token', token);
-//       //set axios defaults
-//       axios.defaults.headers.common['Authorization'] = token;
-//       commit('auth_success', token, user);
-//     }
-//     return res;
-//   },
-// };
-// const mutations = {
-//   auth_request(state) {
-//     state.status = 'loading';
-//   },
-//   auth_request(state, token, user) {
-//     state.status = 'success';
-//     state.token = token;
-//     state.user = user;
-//   },
-// };
-
-// export default {
-//   state,
-//   actions,
-//   mutations,
-//   getters,
-// };
-
 import axios from 'axios';
 import router from '../../router';
 
@@ -93,7 +35,6 @@ const actions = {
         localStorage.setItem('token', token);
         // Set the axios defaults
         axios.defaults.headers.common['Authorization'] = token;
-        console.log('user', user);
         commit('auth_success', { token, user });
       }
       return res;
@@ -111,6 +52,14 @@ const actions = {
     }
     return res;
   },
+
+  async getProfile({ commit }) {
+    commit('profile_request');
+    let res = await axios.get('http://localhost:3000/api/users/profile');
+    commit('user_profile', res.data.user);
+    return res;
+  },
+
   async logout({ commit }) {
     await localStorage.removeItem('token');
     commit('logout');
@@ -126,12 +75,11 @@ const mutations = {
     state.status = 'loading';
   },
   auth_success(state, { token, user }) {
-    console.log('token', token);
-    console.log('user', user);
     state.token = token;
     state.user = user;
     state.status = 'success';
   },
+
   register_request(state) {
     state.status = 'loading';
   },
@@ -142,6 +90,12 @@ const mutations = {
     state.status = '';
     state.token = '';
     state.user = '';
+  },
+  profile_request(state) {
+    state.status = 'loading';
+  },
+  user_profile(state, user) {
+    state.user = user;
   },
 };
 

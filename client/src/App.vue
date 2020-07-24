@@ -137,7 +137,7 @@
   font-family: 'Object Sans', sans-serif;
 }
 
-.btn-primary {
+.btn primary {
   background: #fff;
   color: #000;
   text-transform: uppercase;
@@ -155,11 +155,23 @@
 <script>
 import Nav from '@/components/navigation/Nav';
 import PostModal from '@/components/navigation/PostModal';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
     Nav,
     PostModal,
+  },
+  computed: {
+    ...mapGetters(['isLoggedIn', 'user']),
+  },
+  methods: {
+    ...mapActions(['getProfile']),
+  },
+  created() {
+    if (this.isLoggedIn && _.isEmpty(this.user)) {
+      this.getProfile();
+    }
   },
 };
 </script>

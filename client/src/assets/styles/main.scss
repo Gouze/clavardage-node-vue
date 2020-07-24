@@ -1,13 +1,47 @@
-.btn-primary {
-  background: #fff;
-  color: #000;
-  text-transform: uppercase;
+.app-screen {
+  min-height: calc(100vh - 81px);
+}
+
+.btn {
   border: 2px solid #000;
+  text-transform: uppercase;
   font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  margin: 0 0.25rem;
   padding: 0.2rem 0.4rem;
-  box-shadow: 6px 6px 0px #80ffdb;
+  cursor: pointer;
+
+  &.primary {
+    background: #fff;
+    color: #000;
+    border-color: #000;
+
+    box-shadow: 5px 5px 0px #000;
+    transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+    &:hover {
+      box-shadow: 3px 3px 0px #000;
+    }
+  }
+  &.secondary {
+    background: #80ffdb;
+    color: #000;
+    border-color: #000;
+
+    box-shadow: 5px 5px 0px #000;
+    transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+    &:hover {
+      box-shadow: 3px 3px 0px #000;
+    }
+  }
+}
+
+.black-shadow {
+  box-shadow: 5px 5px 0px #000;
+  border: 3px solid #000;
+
   transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
   &:hover {
-    box-shadow: 3px 3px 0px #80ffdb;
+    box-shadow: 3px 3px 0px #000;
   }
 }

@@ -1,4 +1,6 @@
 const express = require('express');
+const Post = require('./model/Post');
+const User = require('./model/User');
 
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -8,6 +10,7 @@ const cors = require('cors');
 const users = require('./routes/api/users');
 const posts = require('./routes/api/posts');
 const passport = require('passport');
+
 // Initialize app
 const app = express();
 // Middlewares
