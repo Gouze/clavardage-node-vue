@@ -47,10 +47,12 @@ router.post(
             user.posts.push(post);
             user
               .save()
-              .then(() => {
+              .then((user) => {
+                console.log(newPost);
                 return res.status(201).json({
                   success: true,
                   msg: 'Hurry! Post created.',
+                  post: newPost,
                 });
               })
               .catch((err) => {
@@ -78,10 +80,11 @@ router.get(
   }),
   (req, res) => {
     let posts = Post.find()
+      .sort({ createdAt: 'desc' })
       .populate('author')
       .then((posts) => {
         return res.status(200).json({
-          sucess: true,
+          success: true,
           posts: posts,
         });
       });

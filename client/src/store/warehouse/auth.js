@@ -96,6 +96,7 @@ const mutations = {
   },
   user_profile(state, user) {
     state.user = user;
+    state.status = 'success';
   },
 };
 

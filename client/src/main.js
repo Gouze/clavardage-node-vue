@@ -7,9 +7,9 @@ import './assets/styles/main.scss';
 import axios from 'axios';
 import VueLodash from 'vue-lodash';
 import lodash from 'lodash';
-import LottieAnimation from 'lottie-vuejs'; // import lottie-vuejs
+import linkify from 'vue-linkify';
 
-Vue.use(LottieAnimation); // add lottie-animation to your global scope
+Vue.directive('linkified', linkify);
 Vue.config.productionTip = false;
 Vue.use(VueLodash, { name: 'custom', lodash: lodash });
 // Setting axios as vue's http module

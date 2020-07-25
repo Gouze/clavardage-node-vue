@@ -1,7 +1,7 @@
 <template>
   <div class="home container mx-auto">
-    <div v-if="isLoggedIn" class="timeline w-2/3 mx-auto">
-      <lottie-animation path="path/to/your/lottie-animation.json" />
+    <PostForm class="w-2/3 mx-auto mt-6"></PostForm>
+    <div v-if="isLoggedIn" class="timeline w-2/3 mx-auto flex flex-col-reverse">
       <div
         v-for="(post, index) in posts"
         :key="`fruit-${index}`"
@@ -9,9 +9,7 @@
       >
         <div class="flex w-full">
           <div>
-            <div v-if="post.author.avatarURL">
-              avatarURL
-            </div>
+            <div v-if="post.author.avatarURL">avatarURL</div>
             <AdorableAvatar
               v-if="!post.author.avatarURL"
               :email="post.author.email"
@@ -20,18 +18,16 @@
             ></AdorableAvatar>
           </div>
           <div class="flex flex-col ml-4">
-            <span class=" font-semibold">{{ post.author.name || post.author.username }}</span>
+            <span class="font-semibold">{{ post.author.name || post.author.username }}</span>
 
             <span class="text-sm">@{{ post.author.username }}</span>
           </div>
-          <div class=" self-center ml-auto" v-if="checkUser(post.author)">Edit Delete</div>
+          <div class="self-center ml-auto" v-if="checkUser(post.author)">Edit Delete</div>
         </div>
-        <p class="pt-4">{{ post.content }}</p>
+        <p class="pt-4" v-linkified>{{ post.content }}</p>
       </div>
     </div>
-    <div v-if="!isLoggedIn">
-      Clavardage
-    </div>
+    <div v-if="!isLoggedIn">Clavardage</div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -51,25 +47,23 @@
 <script>
 // @ is an alias to /src
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import AdorableAvatar from 'vue-adorable-avatar';
+import PostForm from '../components/forms/PostForm';
 import axios from 'axios';
 
 export default {
   name: 'Home',
   data() {
-    return {
-      posts: [],
-    };
+    return {};
   },
-  components: { KinesisContainer, KinesisElement, AdorableAvatar },
+  components: { KinesisContainer, KinesisElement, AdorableAvatar, PostForm },
   computed: {
-    ...mapGetters(['isLoggedIn', 'user']),
+    ...mapGetters(['isLoggedIn', 'user', 'posts']),
   },
   methods: {
+    ...mapActions(['createPost', 'fetchPosts']),
     checkUser(user) {
-      console.log('user', user.username);
-      console.log('thisuser', this.user.username);
       if (user.username === this.user.username) {
         return true;
       }
@@ -78,10 +72,10 @@ export default {
   },
   created() {
     if (this.isLoggedIn) {
-      console.log('logged');
-      axios.get('http://localhost:3000/api/posts').then((res) => {
-        this.posts = res.data.posts;
-      });
+      this.fetchPosts();
+      // axios.get("http://localhost:3000/api/posts").then((res) => {
+      //   this.posts = res.data.posts;
+      // });
     }
   },
 };
