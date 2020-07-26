@@ -24,6 +24,8 @@ textarea {
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 
+import firebase from 'firebase/app';
+
 export default {
   name: 'PostForm',
   data() {
@@ -44,7 +46,11 @@ export default {
         author: this.user._id,
         createdAt: new Date(),
       };
+
       this.createPost(post).then((res) => {
+        const database = firebase.database();
+        database.ref('posts/').set({ lastPost: res.data.post });
+
         console.log(res);
       });
     },

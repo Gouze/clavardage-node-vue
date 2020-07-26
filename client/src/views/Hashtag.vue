@@ -1,13 +1,11 @@
 <template>
-  <div class="home container mx-auto">
+  <div class="hashtag container mx-auto">
     <PostForm v-if="isLoggedIn" class="w-2/3 mx-auto mt-6"></PostForm>
     <div
       v-if="isLoggedIn && newPost"
       @click="toggleNewPost"
       class="mx-auto w-2/3 bg-tickle-me-pink-300 black-shadow border-dashed p-4"
-    >
-      New post(s)
-    </div>
+    >New post(s)</div>
     <div v-if="isLoggedIn" class="timeline w-2/3 mx-auto flex flex-col-reverse">
       <div
         v-for="(post, index) in posts"
@@ -38,7 +36,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.home {
+.hashtag {
   .main {
     min-height: calc(100vh - 81px);
     .text-animated {
@@ -53,58 +51,40 @@
 </style>
 <script>
 // @ is an alias to /src
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
-import { mapGetters, mapActions } from 'vuex';
-import AdorableAvatar from 'vue-adorable-avatar';
-import PostForm from '../components/forms/PostForm';
-import axios from 'axios';
-import firebase from 'firebase/app';
+import { KinesisContainer, KinesisElement } from "vue-kinesis";
+import { mapGetters } from "vuex";
+import AdorableAvatar from "vue-adorable-avatar";
+import axios from "axios";
 
 export default {
-  name: 'Home',
+  name: "Hashtag",
   data() {
     return {
-      lastPost: null,
-      newPost: false,
+      queriedPosts: [],
     };
   },
-  components: { KinesisContainer, KinesisElement, AdorableAvatar, PostForm },
+  components: { KinesisContainer, KinesisElement, AdorableAvatar },
   computed: {
-    ...mapGetters(['isLoggedIn', 'user', 'posts']),
+    ...mapGetters(["isLoggedIn", "user"]),
   },
   methods: {
-    ...mapActions(['createPost', 'fetchPosts']),
     checkUser(user) {
       if (user.username === this.user.username) {
         return true;
       }
       return false;
     },
-    toggleNewPost() {
-      this.fetchPosts().then(() => {
-        this.newPost = !this.newPost;
-      });
-    },
   },
   created() {
-    const lastPostRef = firebase.database().ref('/posts/lastPost/');
-    lastPostRef.on('value', (snapshot) => {
-      console.log(snapshot.val());
-      this.lastPost = snapshot.val();
-      console.log(this.posts);
-      const lastPostIndex = this.posts.length - 1;
-      if (this.lastPost._id !== this.posts[lastPostIndex]._id) {
-        this.newPost = true;
-      } else {
-        this.newPost = false;
-      }
-    });
-
     if (this.isLoggedIn) {
-      this.fetchPosts();
-      // axios.get("https://clavardage-api.herokuapp.com/api/posts").then((res) => {
-      //   this.posts = res.data.posts;
-      // });
+      axios
+        .get(
+          "https://clavardage-api.herokuapp.com/api/posts/hashtag/" +
+            this.$route.params.hashtag
+        )
+        .then((res) => {
+          this.posts = res.data.queriedPosts;
+        });
     }
   },
 };

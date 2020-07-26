@@ -45,7 +45,12 @@
     box-shadow: 3px 3px 0px #000;
   }
 }
+.border-dashed {
+  border-style: dashed;
+}
 
 .linkified {
   font-weight: 700;
+  background: #80ffdb;
+  box-shadow: 5px 5px 0px #f683ab;
 }

@@ -27,7 +27,7 @@ const actions = {
   async login({ commit, state }, user) {
     commit('auth_request');
     try {
-      let res = await axios.post('http://localhost:3000/api/users/login', user);
+      let res = await axios.post('https://clavardage-api.herokuapp.com/api/users/login', user);
       if (res.data.success) {
         const token = res.data.token;
         const user = res.data.user;
@@ -46,7 +46,7 @@ const actions = {
   //register user
   async register({ commit }, userData) {
     commit('register_request');
-    let res = await axios.post('http://localhost:3000/api/users/register', userData);
+    let res = await axios.post('https://clavardage-api.herokuapp.com/api/users/register', userData);
     if (res.data.succes !== undefined) {
       commit('register_success');
     }
@@ -55,7 +55,7 @@ const actions = {
 
   async getProfile({ commit }) {
     commit('profile_request');
-    let res = await axios.get('http://localhost:3000/api/users/profile');
+    let res = await axios.get('https://clavardage-api.herokuapp.com/api/users/profile');
     commit('user_profile', res.data.user);
     return res;
   },

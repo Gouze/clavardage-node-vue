@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "firebase": "^7.17.1",
     "lottie-vuejs": "0.3.6",
     "tailwindcss": "^1.5.1",
     "vue": "^2.6.11",

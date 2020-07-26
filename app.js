@@ -1,7 +1,6 @@
 const express = require('express');
 const Post = require('./model/Post');
 const User = require('./model/User');
-
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -13,6 +12,7 @@ const passport = require('passport');
 
 // Initialize app
 const app = express();
+
 // Middlewares
 app.use(
   bodyParser.urlencoded({

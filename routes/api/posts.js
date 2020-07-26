@@ -97,4 +97,33 @@ router.get(
   },
 );
 
+/**
+ * @route GET api/posts
+ * @desc Get all posts
+ * @access Private
+ */
+router.get(
+  '/hashtag/:hashtag',
+  passport.authenticate('jwt', {
+    session: false,
+  }),
+  (req, res) => {
+    let posts = Post.find({ hashtag: { $in: req.params.hashtag } })
+      .sort({ createdAt: 'desc' })
+      .populate('author')
+      .then((posts) => {
+        return res.status(200).json({
+          success: true,
+          posts: posts,
+        });
+      });
+
+    // if (posts) {
+    //   return res.status(200).json({
+    //     posts: posts,
+    //   });
+    // }
+  },
+);
+
 module.exports = router;

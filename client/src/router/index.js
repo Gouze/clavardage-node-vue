@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import Hashtag from '../views/Hashtag.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,7 @@ const routes = [
     name: 'Profile',
     component: Profile,
   },
+  { path: '/hashtag/:hashtag', component: Hashtag },
 ];
 
 const router = new VueRouter({
